@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=VT323&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-digital: "VT323", monospace;
+}
+
+@layer utilities {
+  .glitch-border {
+    position: relative;
+    border: 2px solid #00f3ff;
+    box-shadow: -2px 0 #ff00ff, 2px 0 #00f3ff;
+  }
+
+  .glitch-border::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border: 1px solid #ff00ff;
+    opacity: 0.5;
+    animation: jitter 0.3s infinite;
+  }
+
+  .chromatic-aberration {
+    text-shadow: 2px 0 rgba(255,0,255,0.8), -2px 0 rgba(0,243,255,0.8);
+  }
+
+  @keyframes jitter {
+    0% { transform: translate(0); }
+    50% { transform: translate(1px, -1px); }
+    100% { transform: translate(-1px, 1px); }
+  }
+
+  @keyframes screen-tear {
+    0% { clip-path: inset(0 0 0 0); }
+    10% { clip-path: inset(20% -10% 50% 0); transform: translateX(-5px); }
+    11% { clip-path: inset(0 0 0 0); transform: translateX(0); }
+    40% { clip-path: inset(80% 0 10% 0); transform: translateX(5px); }
+    41% { clip-path: inset(0 0 0 0); transform: translateX(0); }
+  }
+
+  .animate-tear {
+    animation: screen-tear 3s steps(1) infinite;
+  }
+
+  .shadow-glow {
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+  }
+  
+  .shadow-glow-magenta {
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.4);
+  }
+
+  .text-glow {
+    text-shadow: 0 0 10px currentColor;
+  }
+
+  .glitch-text {
+    position: relative;
+    animation: glitch 2s infinite;
+  }
+
+  @keyframes glitch {
+    0% { transform: translate(0); text-shadow: -2px 0 #00f3ff, 2px 0 #ff00ff; }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); text-shadow: 2px 0 #00f3ff, -2px 0 #ff00ff; }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); text-shadow: -2px 0 #00f3ff, 2px 0 #ff00ff; }
+    100% { transform: translate(0); }
+  }
+
+  @keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(500%); }
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #222;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #333;
+}
